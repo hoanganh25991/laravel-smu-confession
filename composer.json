@@ -7,7 +7,6 @@
     "require": {
         "php": ">=5.6.4",
         "laravel/framework": "5.3.*",
-        "laravel/socialite": "^2.0",
         "captcha-com/laravel-captcha": "4.*",
         "laracasts/flash": "^2.0",
         "doctrine/dbal": "~2.3",
