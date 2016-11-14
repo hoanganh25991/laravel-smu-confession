@@ -24,7 +24,8 @@ Route::get('home', 'PostController@index')->name('home');
 Route::get('facebook-login', 'SocialLoginController@facebookLogin');
 Route::get('redirect-to-facebook', 'SocialLoginController@redirectToProvider');
 Route::get('facebook-login-callback', 'SocialLoginController@handleProviderCallback');
-Route::get('admin', 'AdminController@index')->name('admin');
+
+Route::get('admin', 'AdminController@verifyPost')->name('admin');
 
 Route::get('post', 'PostController@index');
 Route::post('post', 'PostController@post');

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index(){
+    public function verifyPost(){
         $isAdmin = session('isAdmin', false);
         
         if(!$isAdmin){
@@ -14,6 +14,6 @@ class AdminController extends Controller
         }
         
 //        return ['text' => 'welcome to admin page'];
-        return view('admins.index');
+        return view('admins.verify-post');
     }
 }
