@@ -8,7 +8,7 @@ use App\Post;
 class PostController extends Controller
 {
     public function post(Request $req){
-        $status = $req->get('status');
+        $content = $req->get('content');
         $photo_path = '';
         // validate the user-entered Captcha code when the form is submitted
         $captChaCode = $req->get('CaptchaCode');
@@ -17,7 +17,7 @@ class PostController extends Controller
         if (!$isHuman) {
             // TODO: Captcha validation passed, perform protected  action
 //            return response(['msg' => 'Who\'re you? Please don\'t hack my side']);
-            $post = (object) compact('status');
+            $post = (object) compact('content');
             flash('Please retype your captcha');
             return view('posts.post')->with(compact('post'));
         }
@@ -31,7 +31,7 @@ class PostController extends Controller
             $photo_path = $photo->storeAs('photos', $fileName);
         }
 
-        $post = new Post(compact('status', 'photo_path'));
+        $post = new Post(compact('content', 'photo_path'));
         $post->save();
 
         return $post;

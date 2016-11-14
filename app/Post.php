@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $guarded = ['id'];
-    protected $fillable = ['status', 'photo_path'];
+    protected $fillable = ['content', 'photo_path', 'status', 'facebook_page_id'];
 }

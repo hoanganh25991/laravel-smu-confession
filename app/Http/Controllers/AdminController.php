@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 
 class AdminController extends Controller
 {
@@ -17,10 +18,10 @@ class AdminController extends Controller
         /**
          * Load current post for admin verify
          */
-        $post = Post::where();
+        $posts = Post::where('status', 'pending')->paginate(2);
+//        $posts = DB::table('posts')->paginate(15);
 
-
-        return view('admins.verify-post');
+        return view('admins.verify-post')->with(compact('posts'));
     }
     
 //    public function 

@@ -10,8 +10,8 @@
                     <link href="{{ captcha_layout_stylesheet_url() }}" type="text/css" rel="stylesheet">
 
                     <form action="{{ url('post') }}" method="POST" enctype="multipart/form-data">
-                        <input type="text" name="status" placeholder="What in your mind?"
-                               value="{{ !empty($post) ? $post->status : ''  }}">
+                        <input type="text" name="content" placeholder="What in your mind?"
+                               value="{{ !empty($post) ? $post->content : ''  }}">
                         <input type="file" name="photo" placeholder="Upload the most meaningful photo">
                         {!! captcha_image_html('ExampleCaptcha') !!}
                         <input type="text" id="CaptchaCode" name="CaptchaCode">
