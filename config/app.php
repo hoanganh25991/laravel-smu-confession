@@ -181,7 +181,7 @@ return [
         /**
          * Social Login
          */
-        Laravel\Socialite\SocialiteServiceProvider::class,
+//        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /**
          * Captcha

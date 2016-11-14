@@ -22,7 +22,7 @@ Route::get('home', 'PostController@index')->name('home');
 
 
 Route::get('facebook-login', 'SocialLoginController@facebookLogin');
-Route::get('redirect-to-facebook', 'SocialLoginController@redirectToProvider');
+//Route::get('redirect-to-facebook', 'SocialLoginController@redirectToProvider');
 Route::get('facebook-login-callback', 'SocialLoginController@handleProviderCallback');
 
 Route::get('admin', 'AdminController@verifyPost')->name('admin');
