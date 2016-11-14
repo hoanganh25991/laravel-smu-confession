@@ -16,4 +16,6 @@ class AdminController extends Controller
 //        return ['text' => 'welcome to admin page'];
         return view('admins.verify-post');
     }
+    
+//    public function 
 }
