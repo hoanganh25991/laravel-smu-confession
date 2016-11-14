@@ -61,7 +61,8 @@ class AdminController extends Controller
 //                $data['source'] = $fb->fileToUpload(asset($post->photo_path));
                 try{
 //                    $data['source'] = $fb->fileToUpload('https://tinker.press/demon.gif');
-                    $data['source'] = $fb->fileToUpload('http://localhost:8000/photos/add.gif');
+//                    $data['source'] = $fb->fileToUpload('http://localhost:8000/photos/add.gif');
+                    $data['source'] = $fb->fileToUpload(storage_path($post->photo_path));
                 }catch(\Exception $e){
                     return $e->getMessage();
                 }
