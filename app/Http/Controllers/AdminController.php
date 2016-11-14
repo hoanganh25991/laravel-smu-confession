@@ -14,6 +14,12 @@ class AdminController extends Controller
         }
         
 //        return ['text' => 'welcome to admin page'];
+        /**
+         * Load current post for admin verify
+         */
+        $post = Post::where();
+
+
         return view('admins.verify-post');
     }
     

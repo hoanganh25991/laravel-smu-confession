@@ -9,7 +9,8 @@
         "laravel/framework": "5.3.*",
         "laravel/socialite": "^2.0",
         "captcha-com/laravel-captcha": "4.*",
-        "laracasts/flash": "^2.0"
+        "laracasts/flash": "^2.0",
+        "doctrine/dbal": "~2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
