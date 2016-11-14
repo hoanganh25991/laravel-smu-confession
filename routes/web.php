@@ -17,7 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('home', 'HomeController@index')->name('home');
 
-Route::get('facebook-login', 'SocialLoginController@redirectToProvider');
+Route::get('facebook-login', 'SocialLoginController@facebookLogin');
+Route::get('redirect-to-facebook', 'SocialLoginController@redirectToProvider');
 Route::get('facebook-login-callback', 'SocialLoginController@handleProviderCallback');
+Route::get('admin', 'AdminController@index')->name('admin');
