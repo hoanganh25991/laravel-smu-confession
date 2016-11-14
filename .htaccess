@@ -13,5 +13,5 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_URI} !^/public/
     #RewriteRule ^css/fonts/flat-icon/(.*)$ public/css/fonts/flat-icon/$1 [L,NC]
-    RewriteRule ^(css|js|images|build|vendors|fonts|sounds)/(.*)$ public/$1/$2 [L,NC]
+    RewriteRule ^(css|js|images|photos|build|vendors|fonts|sounds)/(.*)$ public/$1/$2 [L,NC]
 </IfModule>
