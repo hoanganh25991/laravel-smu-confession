@@ -183,6 +183,16 @@ return [
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
 
+        /**
+         * Captcha
+         */
+        LaravelCaptcha\Providers\LaravelCaptchaServiceProvider::class,
+
+        /**
+         * Flash message
+         */
+        Laracasts\Flash\FlashServiceProvider::class,
+
     ],
 
     /*

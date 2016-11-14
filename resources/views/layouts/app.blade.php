@@ -78,10 +78,15 @@
             </div>
         </nav>
 
+        <!-- Scripts -->
+        <script src="{{ url('js/app.js') }}"></script>
+        @include('flash::message')
+        <script>
+            $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+        </script>
+
         @yield('content')
     </div>
 
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
 </body>
 </html>

@@ -6,10 +6,15 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Post</div>
+                    {{--for captcha come in--}}
+                    <link href="{{ captcha_layout_stylesheet_url() }}" type="text/css" rel="stylesheet">
 
                     <form action="{{ url('post') }}" method="POST" enctype="multipart/form-data">
-                        <input type="text" name="status" placeholder="What in your mind?">
+                        <input type="text" name="status" placeholder="What in your mind?"
+                               value="{{ !empty($post) ? $post->status : ''  }}">
                         <input type="file" name="photo" placeholder="Upload the most meaningful photo">
+                        {!! captcha_image_html('ExampleCaptcha') !!}
+                        <input type="text" id="CaptchaCode" name="CaptchaCode">
                         <button>Submit</button>
                     </form>
                 </div>
