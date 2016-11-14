@@ -7,9 +7,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
-                <div class="panel-body">
-                    You are logged in!
-                </div>
+                <form action="{{ url('post') }}" method="POST" enctype="multipart/form-data">
+                    <input type="text" name="status" placeholder="What in your mind?">
+                    <input type="file" name="photo" placeholder="Upload the most meaningful photo">
+                    <button>Submit</button>
+                </form>
             </div>
         </div>
     </div>

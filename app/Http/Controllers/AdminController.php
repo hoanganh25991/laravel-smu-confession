@@ -13,6 +13,7 @@ class AdminController extends Controller
             return ['text' => 'Hey, you are not admin'];
         }
         
-        return ['text' => 'welcome to admin page'];
+//        return ['text' => 'welcome to admin page'];
+        return view('admins.index');
     }
 }
