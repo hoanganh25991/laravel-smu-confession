@@ -10,7 +10,8 @@
         "laravel/socialite": "^2.0",
         "captcha-com/laravel-captcha": "4.*",
         "laracasts/flash": "^2.0",
-        "doctrine/dbal": "~2.3"
+        "doctrine/dbal": "~2.3",
+        "facebook/graph-sdk": "^5.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
