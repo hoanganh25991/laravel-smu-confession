@@ -25,7 +25,7 @@ class AdminController extends Controller
             /**
              * Load current post for admin verify
              */
-            $posts = Post::where('status', 'pending')->paginate(2);
+            $posts = Post::where('status', 'pending')->orderBy('created_at', 'desc')->paginate(2);
 //        $posts = DB::table('posts')->paginate(15);
 
             return view('admins.verify-post')->with(compact('posts'));

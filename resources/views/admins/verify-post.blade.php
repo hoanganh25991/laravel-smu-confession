@@ -4,15 +4,15 @@
     <h1>Loop all status post here</h1>
     <div>
         @foreach($posts as $post)
-            <div>
+            <div class="aPost">
                 <p>{{ $post->content }}</p>
                 @if(!empty($post->photo_path))
                     <img src="{{ asset($post->photo_path) }}" height="100">
                 @endif
                 <input type="hidden" name="postId" value="{{ $post->id }}">
                 <div>
-                    <button id="btnAcceptPost" post-id="{{ $post->id }}">accept</button>
-                    <button id="btnRemovePost">remove</button>
+                    <button class="btnAcceptPost" post-id="{{ $post->id }}">accept</button>
+                    <button class="btnRemovePost">remove</button>
                 </div>
             </div>
         @endforeach
@@ -29,12 +29,17 @@
     trash         : never look back again
 
     <script>
-        let btnAcceptPost = $('#btnAcceptPost');
-        let btnRemovePost = $('#btnRemovePost');
+        let btnAcceptPost = $('.btnAcceptPost');
+        let btnRemovePost = $('.btnRemovePost');
 
         let postId = $('input[name="postId"]').val();
 
         btnAcceptPost.on('click', function(){
+            let thisBtn = $(this);
+            let parentDiv = thisBtn.parents('div.aPost');
+//            console.log(parentDiv);
+//            parentDiv.remove();
+
             console.log('btnAcceptPost click');
             $.post({
                 url: '{{ url('admin') }}',
@@ -44,6 +49,7 @@
                 },
                 success(res){
                     console.log(res);
+                    parentDiv.remove();
                 },
                 error(err){
                     console.log(err);
@@ -60,6 +66,7 @@
                 },
                 success(res){
                     console.log(res);
+
                 },
                 error(err){
                     console.log(err);
