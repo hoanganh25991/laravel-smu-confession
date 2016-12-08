@@ -9,6 +9,7 @@ class PostController extends Controller
 {
     public function post(Request $req){
         $content = $req->get('content');
+        $photo_path = '';
         // g-recaptcha-response
         $gRecaptchaRes = $req->get('g-recaptcha-response');
         $isHuman = $this->validateCaptcha($gRecaptchaRes);

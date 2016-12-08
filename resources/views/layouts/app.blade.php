@@ -5,10 +5,10 @@
     <title>Confessing In SMU Confessions</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://confessing.in/css/normalize.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url('css/main.css') }}">
     <script src="https://www.google.com/recaptcha/api.js?render=onload"></script>
+    <script src="{{ url('js/jquery.min.js') }}"></script>
 </head>
 <body>
 <div class="container">
@@ -19,7 +19,7 @@
             </a>
         </div>
         <div class="row" style="background-color: white">
-            <div class="col-md-10 col-md-offset-1" style="padding-top: 20px">
+            <div class="col-md-10 col-md-offset-1" style="padding-top: 30px">
                 @yield('content')
             </div>
         </div>

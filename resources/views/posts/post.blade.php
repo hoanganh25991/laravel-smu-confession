@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-    <form method="POST" action="{{ route('post') }}">
+    <form method="POST" action="{{ route('post') }}" enctype="multipart/form-data">
         <div class="form-group">
                             <textarea
                                     name="content"
