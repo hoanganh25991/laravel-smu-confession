@@ -63,6 +63,7 @@ class SocialLoginController extends Controller{
          */
         $usersRoleAdmin = UserRole::where('role', 'admin')->get();
         $user = $graphNode;
+        $userFacebookId = $user->getField('id');
         $isAdmin = $usersRoleAdmin
                 ->filter(function ($userRoleAdmin) use ($user){
                     return $userRoleAdmin->provider_id == $user->getField('id');
@@ -72,6 +73,18 @@ class SocialLoginController extends Controller{
 
         session(['isAdmin' => $isAdmin]);
         $redirectUrl = $isAdmin ? 'admin' : '';
+        flash("Facebook id: {$user->getField('id')}");
+
+        /**
+         * Just store for easy check
+         */
+
+        $newUserRole = UserRole::where('provider_id', $userFacebookId)->first();
+        if(empty($newUserRole)){
+            $newUserRole = new UserRole();
+        }
+        $newUserRole->provider_id = $userFacebookId;
+        $newUserRole->save();
 
         return redirect($redirectUrl);
     }

@@ -12,6 +12,10 @@
 </head>
 <body>
 <div class="container">
+    @include('flash::message')
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+    </script>
     <div class="col-md-8 col-md-offset-2">
         <div class="row">
             <a href="{{ url('') }}">
