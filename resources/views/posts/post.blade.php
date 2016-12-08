@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="g-recaptcha"
-                         data-sitekey="6LfRNA4UAAAAACu43cey18hR5OxgHJ40ebtRpOA8"></div>
+                         data-sitekey="{{ env('GOOGLE_RECAPTCHA_SITE') }}"></div>
                 </div>
                 <div class="col-md-4">
                     <div class="pull-right" style="position: relative">
