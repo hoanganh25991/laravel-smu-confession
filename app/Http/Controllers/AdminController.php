@@ -53,7 +53,7 @@ class AdminController extends Controller{
             $pageAccessToken = env('PAGE_ACCESS_TOKEN');
             $fb->setDefaultAccessToken($pageAccessToken);
 
-            $data = ['message' => "Confession #{$nextConfessionId}\n{$post->content}"];
+            $data = ['message' => "#{$nextConfessionId}\n{$post->content}"];
             $postUrl = '/1582722098684919/feed';
             try{
                 /**
