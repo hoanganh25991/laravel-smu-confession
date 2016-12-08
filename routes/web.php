@@ -17,12 +17,9 @@
 
 Auth::routes();
 
-//Route::get('home', 'HomeController@index')->name('home');
-Route::get('home', 'PostController@index')->name('home');
-Route::post('home', 'PostController@post');
-
-Route::get('', 'PostController@index');
+Route::get('', 'PostController@index')->name('post');
 Route::post('', 'PostController@post');
+Route::get('post-success', 'PostController@postSuccess');
 
 Route::get('facebook-login', 'SocialLoginController@facebookLogin');
 //Route::get('redirect-to-facebook', 'SocialLoginController@redirectToProvider');
@@ -31,10 +28,7 @@ Route::get('facebook-login-callback', 'SocialLoginController@handleProviderCallb
 Route::get('admin', 'AdminController@verifyPost')->name('admin');
 Route::post('admin', 'AdminController@verifyPost');
 
-Route::get('post', 'PostController@index');
-Route::post('post', 'PostController@post');
-
 Route::get('test/home-ui', function(){
-    return view('layouts.app');
+//    return view('layouts.app');
+    return view('test.ui-x');
 });
-

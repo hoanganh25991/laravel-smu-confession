@@ -14,14 +14,17 @@
 <div class="container">
     <div class="col-md-8 col-md-offset-2">
         <div class="row">
-            <a href="{{ route('home') }}">
+            <a href="{{ url('') }}">
                 <img class="img-responsive" src="{{ url('images/smu_confessions_header.png') }}">
             </a>
         </div>
-        <div class="row white-template">
+        <div class="row" style="background-color: white">
             <div class="col-md-10 col-md-offset-1" style="padding-top: 20px">
                 @yield('content')
             </div>
+        </div>
+        <div class="row">
+            @yield('footer')
         </div>
     </div>
 </div>
