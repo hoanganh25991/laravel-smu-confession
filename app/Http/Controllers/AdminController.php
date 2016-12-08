@@ -87,4 +87,8 @@ class AdminController extends Controller{
 
     }
 
+    public function addAmin(){
+        
+    }
+
 }

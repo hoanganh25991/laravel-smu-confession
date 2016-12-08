@@ -25,6 +25,9 @@ Route::get('admin', 'AdminController@verifyPost')->name('admin');
 Route::get('admin/login', 'SocialLoginController@facebookLogin');
 Route::get('admin/facebook-login-callback', 'SocialLoginController@handleProviderCallback');
 Route::post('admin', 'AdminController@verifyPost');
+Route::get('admin/add', 'AdminController@addAdmin');
+
+Route::get('new-facebook-id', 'SocialLoginController@getNewFacebookId');
 
 Route::get('test/home-ui', function(){
 //    return view('layouts.app');
