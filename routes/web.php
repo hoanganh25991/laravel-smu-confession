@@ -21,12 +21,13 @@ Route::get('', 'PostController@index')->name('post');
 Route::post('', 'PostController@post');
 Route::get('post-success', 'PostController@postSuccess');
 
-Route::get('facebook-login', 'SocialLoginController@facebookLogin');
-//Route::get('redirect-to-facebook', 'SocialLoginController@redirectToProvider');
-Route::get('facebook-login-callback', 'SocialLoginController@handleProviderCallback');
-
 Route::get('admin', 'AdminController@verifyPost')->name('admin');
-Route::post('admin', 'AdminController@verifyPost');
+Route::get('admin/login', 'SocialLoginController@facebookLogin');
+Route::get('admin/facebook-login-callback', 'SocialLoginController@handleProviderCallback');
+
+
+//Route::get('admin', 'AdminController@verifyPost')->name('admin');
+//Route::post('admin', 'AdminController@verifyPost');
 
 Route::get('test/home-ui', function(){
 //    return view('layouts.app');

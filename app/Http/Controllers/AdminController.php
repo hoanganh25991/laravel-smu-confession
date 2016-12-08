@@ -13,22 +13,13 @@ class AdminController extends Controller
      * @return $this|array|\Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function verifyPost(Request $req){
-        $isAdmin = session('isAdmin', false);
-        
-        if(!$isAdmin){
-            return ['text' => 'Hey, you are not admin'];
-        }
-
+        $this->checkFacebookLogin();
 
         if($req->method() == 'GET'){
-            //        return ['text' => 'welcome to admin page'];
-            /**
-             * Load current post for admin verify
-             */
             $posts = Post::where('status', 'pending')->orderBy('created_at', 'desc')->paginate(2);
-//        $posts = DB::table('posts')->paginate(15);
 
-            return view('admins.verify-post')->with(compact('posts'));
+//            return view('admins.verify-post')->with(compact('posts'));
+            return view('admins.admin')->with(compact('posts'));
         }
 
         if($req->method() == 'POST'){
@@ -84,5 +75,10 @@ class AdminController extends Controller
 
     }
     
-//    public function 
+    private function checkFacebookLogin(){
+        $isAdmin = session('isAdmin');
+        if(!$isAdmin){
+            return redirect('admin/login');
+        }
+    }
 }

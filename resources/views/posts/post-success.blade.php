@@ -27,7 +27,7 @@
 
 @section('footer')
     <div style="background-color: white; text-align: center;">
-        <p>Download SG BusLeh and get to your presentation on time!</p>
+        <p><a href="by.originally.us/busleh/redir">Download</a> SG BusLeh and get to your presentation on time!</p>
         <img class="img-responsive" src="{{ url('images/sg-busleh.png') }}">
     </div>
 @endsection
