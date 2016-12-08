@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use Facebook;
 use App\Config;
+use App\UserRole;
 
 class AdminController extends Controller{
     /**
@@ -87,8 +88,28 @@ class AdminController extends Controller{
 
     }
 
-    public function addAmin(){
-        
+    public function addAdmin(Request $req){
+        if($req->method() == 'GET'){
+            $userRoles = UserRole::where('role', '!=', 'admin')->orWhereNull('role')->get();
+            return view('admins.add-admin')->with(compact('userRoles'));
+        }
+
+        $userRoleId = $req->get('userRoleId');
+        $userRole = UserRole::find($userRoleId);
+
+        $action = $req->get('action');
+        if($action == 'discard'){
+            $userRole->delete();
+
+            return response(['msg' => "userRole id {$userRoleId}: deleted"], 200,
+                ['Content-Type' => 'application/json']);
+        }
+
+        $userRole->role = 'admin';
+        $userRole->save();
+
+        return response(['msg' => "userRole id {$userRoleId}: added role admin"], 200,
+            ['Content-Type' => 'application/json']);
     }
 
 }

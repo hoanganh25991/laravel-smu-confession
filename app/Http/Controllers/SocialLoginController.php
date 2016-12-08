@@ -54,8 +54,8 @@ class SocialLoginController extends Controller{
         $user = $graphNode;
         $userFacebookId = $user->getField('id');
         $isAdmin = $usersRoleAdmin
-                ->filter(function ($userRoleAdmin) use ($user){
-                    return $userRoleAdmin->provider_id == $user->getField('id');
+                ->filter(function ($userRoleAdmin) use ($userFacebookId){
+                    return $userRoleAdmin->provider_id == $userFacebookId;
                 })
                 ->count()
                 >= 1;
@@ -73,6 +73,7 @@ class SocialLoginController extends Controller{
             $newUserRole = new UserRole();
         }
         $newUserRole->provider_id = $userFacebookId;
+        $newUserRole->name = $user->getField('name');
         $newUserRole->save();
 
         return redirect($redirectUrl);
