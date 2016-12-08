@@ -1,86 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Confessing In SMU Confessions</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Styles -->
-    <link href="{{ url('css/app.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="http://confessing.in/css/normalize.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url('css/main.css') }}">
+    <script src="https://www.google.com/recaptcha/api.js?render=onload"></script>
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+<div class="container">
+    <div class="col-md-8 col-md-offset-2 col-xs-12">
+        <div class="row">
+            <a href="{{ route('home') }}">
+                <img class="img-responsive" src="{{ url('images/smu_confessions_header.png') }}">
+            </a>
+        </div>
+        <div class="row white-template">
+            <div class="col-md-10 col-md-offset-1 col-xs-12">
+                <div class="row" style="margin-top: 50px">
+                    <form method="POST" action="">
+                        <div class="form-group">
+                            <textarea name="confessing-in" rows="10"
+                                      class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="file" class="form-control">
+                                <span class="input-group-addon">Upload</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-8 col-xs-12">
+                                    <div class="g-recaptcha" data-sitekey="6LfRNA4UAAAAACu43cey18hR5OxgHJ40ebtRpOA8"></div>
+                                </div>
+                                <div class="col-md-4 pull-right">
+                                    <div class="pull-right" style="position: relative">
+                                        <button type="submit" class="btn btn-default" style="height: 74px;">SUBMIT LIAO*</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+                    </form>
                 </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ url('/logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
+                <div class="row">
                 </div>
             </div>
-        </nav>
+        </div>
 
-        <!-- Scripts -->
-        <script src="{{ url('js/app.js') }}"></script>
-        @include('flash::message')
-        <script>
-            $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
-        </script>
-
-        @yield('content')
     </div>
+    <div class="row" id="confessions-header">
+        <h3 class="col-xs-12 col-md-8 col-md-offset-2">Past confessions</h3>
+    </div>
+    <div class="row" id="confessions">
 
+    </div>
+</div>
 </body>
 </html>

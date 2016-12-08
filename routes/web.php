@@ -34,3 +34,7 @@ Route::post('admin', 'AdminController@verifyPost');
 Route::get('post', 'PostController@index');
 Route::post('post', 'PostController@post');
 
+Route::get('test/home-ui', function(){
+    return view('layouts.app');
+});
+
