@@ -13,7 +13,11 @@ class AdminController extends Controller{
      * @return $this|array|\Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function verifyPost(Request $req){
-        $this->checkFacebookLogin();
+        $isAdmin = session('isAdmin');
+        if(!$isAdmin){
+            return redirect('admin/login');
+        }
+
         $confessionIdConfig = Config::where('key', 'lastConfessionId')->first();
         $lastConfessionId = $confessionIdConfig->value;
         $nextConfessionId = $lastConfessionId + 1;
@@ -83,10 +87,4 @@ class AdminController extends Controller{
 
     }
 
-    private function checkFacebookLogin(){
-        $isAdmin = session('isAdmin');
-        if(!$isAdmin){
-            return redirect('admin/login');
-        }
-    }
 }
