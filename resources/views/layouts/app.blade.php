@@ -12,52 +12,17 @@
 </head>
 <body>
 <div class="container">
-    <div class="col-md-8 col-md-offset-2 col-xs-12">
+    <div class="col-md-8 col-md-offset-2">
         <div class="row">
             <a href="{{ route('home') }}">
                 <img class="img-responsive" src="{{ url('images/smu_confessions_header.png') }}">
             </a>
         </div>
         <div class="row white-template">
-            <div class="col-md-10 col-md-offset-1 col-xs-12">
-                <div class="row" style="margin-top: 50px">
-                    <form method="POST" action="">
-                        <div class="form-group">
-                            <textarea name="confessing-in" rows="10"
-                                      class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="file" class="form-control">
-                                <span class="input-group-addon">Upload</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-8 col-xs-12">
-                                    <div class="g-recaptcha" data-sitekey="6LfRNA4UAAAAACu43cey18hR5OxgHJ40ebtRpOA8"></div>
-                                </div>
-                                <div class="col-md-4 pull-right">
-                                    <div class="pull-right" style="position: relative">
-                                        <button type="submit" class="btn btn-default" style="height: 74px;">SUBMIT LIAO*</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="row">
-                </div>
+            <div class="col-md-10 col-md-offset-1" style="padding-top: 20px">
+                @yield('content')
             </div>
         </div>
-
-    </div>
-    <div class="row" id="confessions-header">
-        <h3 class="col-xs-12 col-md-8 col-md-offset-2">Past confessions</h3>
-    </div>
-    <div class="row" id="confessions">
-
     </div>
 </div>
 </body>
