@@ -14,6 +14,8 @@ class PostController extends Controller
         $gRecaptchaRes = $req->get('g-recaptcha-response');
         $isHuman = $this->validateCaptcha($gRecaptchaRes);
         if(!$isHuman){
+            flash('reCAPTCHA validate failed');
+
             return redirect('');
         }
 
