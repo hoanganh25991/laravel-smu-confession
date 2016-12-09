@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Socialite;
 use App\UserRole;
 use Facebook;
-
-session_start();
+use App\Http\LaravelPersistentData;
+//session_start();
 
 class SocialLoginController extends Controller{
     protected $fb;
@@ -16,7 +16,8 @@ class SocialLoginController extends Controller{
         $this->fb = new Facebook\Facebook([
             'app_id' => '1282309335173913',
             'app_secret' => 'd27cdfa5fcb1c92a079552d878bc3dae',
-            'default_graph_version' => 'v2.8'
+            'default_graph_version' => 'v2.8',
+            'persistent_data_handler' => new LaravelPersistentData()
         ]);
     }
     
@@ -38,7 +39,6 @@ class SocialLoginController extends Controller{
 
         try {
             $accessToken = $helper->getAccessToken();
-            $_SESSION['facebook_access_token'] = (string) $accessToken;
             $response = $fb->get('/me', $accessToken);
             $graphNode = $response->getGraphNode();
         } catch(Facebook\Exceptions\FacebookSDKException $e) {
@@ -59,10 +59,17 @@ class SocialLoginController extends Controller{
                 })
                 ->count()
                 >= 1;
-
+        /**
+         * Store admin state for post request accepted
+         */
         session(['isAdmin' => $isAdmin]);
+        
         $redirectUrl = $isAdmin ? 'admin' : '';
-        flash("Facebook id: {$user->getField('id')}");
+        
+        $flashMsg = "Facebook id: {$user->getField('id')}";
+        if(!$isAdmin){
+            $flashMsg += "\nYour admin request submitted. Please wait for accept from admin";
+        }
 
         /**
          * Just store for easy check
@@ -75,6 +82,8 @@ class SocialLoginController extends Controller{
         $newUserRole->provider_id = $userFacebookId;
         $newUserRole->name = $user->getField('name');
         $newUserRole->save();
+
+        flash($flashMsg);
 
         return redirect($redirectUrl);
     }

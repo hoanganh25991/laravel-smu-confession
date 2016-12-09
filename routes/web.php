@@ -21,14 +21,21 @@ Route::get('', 'PostController@index')->name('post');
 Route::post('', 'PostController@post');
 Route::get('post-success', 'PostController@postSuccess');
 
-Route::get('admin', 'AdminController@verifyPost')->name('admin');
+//Route::get('admin', 'AdminController@verifyPost')->name('admin');
 Route::get('admin/login', 'SocialLoginController@facebookLogin');
 Route::get('admin/facebook-login-callback', 'SocialLoginController@handleProviderCallback');
-Route::post('admin', 'AdminController@verifyPost');
+//Route::post('admin', 'AdminController@verifyPost');
 
 Route::get('new-facebook-id', 'SocialLoginController@getNewFacebookId');
-Route::get('admin/add', 'AdminController@addAdmin');
-Route::post('admin/add', 'AdminController@addAdmin');
+//Route::get('admin/add', 'AdminController@addAdmin');
+//Route::post('admin/add', 'AdminController@addAdmin');
+Route::group(['middleware' => 'isAdmin'], function(){
+    Route::get('admin', 'AdminController@verifyPost')->name('admin');
+    Route::post('admin', 'AdminController@verifyPost');
+
+    Route::get('admin/add', 'AdminController@addAdmin');
+    Route::post('admin/add', 'AdminController@addAdmin');
+});
 
 Route::get('test/home-ui', function(){
 //    return view('layouts.app');
