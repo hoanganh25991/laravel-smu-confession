@@ -78,7 +78,7 @@ class AdminController extends Controller{
             $confessionIdConfig->value = $nextConfessionId;
             $confessionIdConfig->save();
 
-            return response($graphNode->getField('id'), 200, ['Content-Type' => 'application/json']);
+            return response(['msg' => "Post id: {$graphNode->getField('id')}"], 200, ['Content-Type' => 'application/json']);
         }
 
     }
