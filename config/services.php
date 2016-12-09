@@ -41,4 +41,9 @@ return [
         'redirect' => env('FACEBOOK_LOGIN_CALLBACK', 'http://localhost:8000/facebook-login-callback'),
     ],
 
+    'rollbar' => [
+        'access_token' => env('ROLLBAR_TOKEN'),
+        'level' => env('ROLLBAR_LEVEL'),
+    ],
+
 ];

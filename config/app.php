@@ -193,6 +193,10 @@ return [
          */
         Laracasts\Flash\FlashServiceProvider::class,
 
+        /**
+         * Rollbar manage error
+         */
+        Jenssegers\Rollbar\RollbarServiceProvider::class,
     ],
 
     /*
