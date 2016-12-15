@@ -19,7 +19,7 @@ class AdminController extends Controller{
         $nextConfessionId = $lastConfessionId + 1;
 
         if($req->method() == 'GET'){
-            $posts = Post::where('status', 'pending')->orderBy('created_at', 'desc')->paginate(5);
+            $posts = Post::where('status', 'pending')->orderBy('created_at', 'asc')->paginate(5);
 
             return view('admins.admin')->with(compact('posts', 'nextConfessionId'));
         }
