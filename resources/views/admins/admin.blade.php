@@ -21,7 +21,7 @@
                     </div>
                 @else
                     {{--<p>{{ $breakNewLineContent }}</p>--}}
-                    <?php $breakNewLineContent = str_replace("\n", "<br>", $post->content); ?>
+                    <?php $breakNewLineContent = preg_replace("/\r\n|\r|\n/", '<br/>', $post->content); ?>
                     <p><?php echo $breakNewLineContent; ?></p>
                 @endif
             </div>
