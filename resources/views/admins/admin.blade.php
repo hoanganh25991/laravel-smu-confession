@@ -20,7 +20,9 @@
                         <img class="img-responsive" src="{{ asset($post->photo_path) }}" height="150">
                     </div>
                 @else
-                    <p>{{ $post->content }}</p>
+                    {{--<p>{{ $breakNewLineContent }}</p>--}}
+                    <?php $breakNewLineContent = str_replace("\n", "<br>", $post->content); ?>
+                    <p><?php echo $breakNewLineContent; ?></p>
                 @endif
             </div>
             <div class="row">
@@ -36,6 +38,10 @@
     <style>
         .post-row {
             background-color: #eee;
+        }
+
+        p {
+            word-wrap: break-word;
         }
     </style>
     <script>
