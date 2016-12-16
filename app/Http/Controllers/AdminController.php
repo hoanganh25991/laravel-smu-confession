@@ -57,7 +57,7 @@ class AdminController extends Controller{
                  * Save to photo
                  */
                 if(!empty($post->photo_path)){
-                    $data['source'] = $fb->fileToUpload(storage_path($post->photo_path));
+                    $data['source'] = $fb->fileToUpload(public_path($post->photo_path));
                     $postUrl = '/me/photos';
                 }
                 $res = $fb->post($postUrl, $data);
