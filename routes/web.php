@@ -35,6 +35,8 @@ Route::group(['middleware' => 'isAdmin'], function(){
 
     Route::get('admin/add', 'AdminController@addAdmin');
     Route::post('admin/add', 'AdminController@addAdmin');
+    
+    Route::post('admin/post', 'AdminController@postByAdmin');
 });
 
 Route::get('test/home-ui', function(){

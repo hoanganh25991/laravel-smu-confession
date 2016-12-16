@@ -11,12 +11,19 @@ class PostController extends Controller
         $content = $req->get('content');
         $photo_path = '';
         // g-recaptcha-response
-        $gRecaptchaRes = $req->get('g-recaptcha-response');
-        $isHuman = $this->validateCaptcha($gRecaptchaRes);
-        if(!$isHuman){
-            flash('reCAPTCHA validate failed', 'danger');
+        $role = $req->get('role');
+        if(empty($role)){
+            $gRecaptchaRes = $req->get('g-recaptcha-response');
+            $isHuman = $this->validateCaptcha($gRecaptchaRes);
+            if(!$isHuman){
+                flash('reCAPTCHA validate failed', 'danger');
 
-            return redirect('');
+                return redirect('');
+            }
+        }
+
+        if($role == 'admin'){
+            // Continue
         }
 
         /**
@@ -31,7 +38,8 @@ class PostController extends Controller
         $post = new Post(compact('content', 'photo_path'));
         $post->save();
 
-        return redirect('post-success');
+        $redirectTo = empty($role) ? 'post-success' : 'admin';
+        return redirect($redirectTo);
     }
     
     public function index(){
@@ -74,5 +82,5 @@ class PostController extends Controller
     public function postSuccess(){
         return view('posts.post-success');
     }
-    
+
 }

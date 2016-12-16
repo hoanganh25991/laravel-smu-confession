@@ -106,5 +106,10 @@ class AdminController extends Controller{
         return response(['msg' => "userRole id {$userRoleId}: added role admin"], 200,
             ['Content-Type' => 'application/json']);
     }
+    
+    public function postByAdmin(Request $req){
+        $postController = new PostController();
+        return $postController->post($req);
+    }
 
 }

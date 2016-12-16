@@ -1,6 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
+    <form method="POST" action="{{ url('admin/post') }}" enctype="multipart/form-data" id="postForm">
+        <input type="hidden" name="role" value="admin">
+        <div class="form-group">
+            <textarea
+                    name="content"
+                    rows="3"
+                    class="form-control"
+                    placeholder="Your little confession here"
+            ></textarea>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <input type="file"
+                       name="photo"
+                       class="form-control">
+                <span class="input-group-addon">Upload</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="pull-right" style="position: relative">
+                    <button type="submit" class="btn btn-default">SUBMIT</button>
+                </div>
+            </div>
+        </div>
+    </form>
     @if($posts->count() == 0)
         <h1>Hi admin</h1>
         <h1>No post ☺, <a href="https://www.google.com/search?q=Atari+Breakout&tbm=isch">ping pong?</a></h1>
@@ -70,5 +96,16 @@
                 }
             });
         }
+
+        let postFormOptions = {
+            url: "{{ url('admin/post') }}",
+            type: 'post',
+            succes(res){
+                console.log(res);
+            },
+            error(res){
+                console.log(res);
+            }
+        };
     </script>
 @endsection
