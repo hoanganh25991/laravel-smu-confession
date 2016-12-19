@@ -17,6 +17,17 @@ class AdminController extends Controller{
      */
     public function verifyPost(Request $req){
         $confessionIdConfig = Config::where('key', 'lastConfessionId')->first();
+        /**
+         * Instead of go to serve add this default config
+         * How could i remember later on?
+         * If not set, just run a default
+         */
+        if(empty($confessionIdConfig)){
+            $confessionIdConfig =  new Config([
+                'key' => 'lastConfessionId',
+                'value' => 24691
+            ]);
+        }
         $lastConfessionId = $confessionIdConfig->value;
         $nextConfessionId = $lastConfessionId + 1;
 
@@ -65,6 +76,13 @@ class AdminController extends Controller{
             // Another new post has to wait for +30 minutes
             $lastPostAtConfig->value =  $carbonTime->timestamp;
             $lastPostAtConfig->save();
+
+            /**
+             * Update post status
+             * Not pending, not approved, it should be 'queued'
+             */
+            $post->status = 'queued';
+            $post->save();
 
             /**
              * Log on who approve this post

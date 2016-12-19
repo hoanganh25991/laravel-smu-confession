@@ -22,3 +22,5 @@ if($repositoryName != "laravel-smu-confession"){
 
 echo shell_exec("whoami");
 echo shell_exec("git pull origin master");
+//should migrate immediately
+echo shell_exec("php artisan migrate");
