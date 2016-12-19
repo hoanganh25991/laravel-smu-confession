@@ -27,6 +27,7 @@ class AdminController extends Controller{
         if($req->method() == 'POST'){
             $action = $req->get('action');
             $postId = $req->get('postId');
+            $postContent = $req->get('postContent');
 
             $post = Post::find($postId);
             /**
@@ -35,6 +36,12 @@ class AdminController extends Controller{
             if($action == 'discard'){
                 $post->delete();
                 return response(['msg' => "postId {$postId}: deleted"], 200, ['Content-Type' => 'application/json']);
+            }
+
+            if($action == 'approve'){
+                // Update postContent if admin modify it
+                $post->content = $postContent;
+                $post->save();
             }
 
             /**

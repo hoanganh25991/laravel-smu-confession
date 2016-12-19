@@ -82,6 +82,9 @@
     </style>
     <script>
         window.addEventListener('click', verifyPost);
+        /**
+         * Adjust textarea height, always fit content
+         */
         $('textarea').on('change keyup keydown paste cut', function () {
             $(this).height(0).height(this.scrollHeight);
         }).change();
@@ -94,11 +97,13 @@
             let action = btn.attr('action');
             let parentDiv = btn.parents('div.post-row');
             let postId = btn.siblings('input[name="postId"]').val();
+            let postContent = parentDiv.find('textarea').val();
             $.post({
                 url: '{{ url('admin') }}',
                 data: {
                     action,
-                    postId
+                    postId,
+                    postContent
                 },
                 success(res){
                     console.log(res);
