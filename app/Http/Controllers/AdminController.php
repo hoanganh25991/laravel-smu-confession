@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\PostToFacebookPage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Post;
 use Facebook;
@@ -45,45 +47,24 @@ class AdminController extends Controller{
             }
 
             /**
-             * Approve
+             * Approve post now base on Queue
+             * Bcs we have to delay at least 30 minutes
              */
-            $fb = new Facebook\Facebook([
-                'app_id' => '1282309335173913',
-                'app_secret' => 'd27cdfa5fcb1c92a079552d878bc3dae',
-                'default_graph_version' => 'v2.8'
-            ]);
-
-            $pageAccessToken = env('PAGE_ACCESS_TOKEN');
-            $fb->setDefaultAccessToken($pageAccessToken);
-
-            $data = ['message' => "#{$nextConfessionId}\n========\n{$post->content}\n========\nConfess at: http://smuconfess.originally.us"];
-            $postUrl = '/'.env('PAGE_ID').'/feed';
-            try{
-                /**
-                 * Case post with image
-                 * Save to photo
-                 */
-                if(!empty($post->photo_path)){
-                    $data['source'] = $fb->fileToUpload(public_path($post->photo_path));
-                    $postUrl = '/me/photos';
-                }
-                $res = $fb->post($postUrl, $data);
-                $graphNode = $res->getGraphNode();
-            }catch(Facebook\Exceptions\FacebookSDKException $e){
-                return $e->getMessage();
-                exit;
+            $lastPostAtConfig = Config::where('key', 'lastPostAt')->first();
+            if(empty($lastPostAtConfig)){
+                $lastPostAtConfig = new Config([
+                    'key' => 'lastPostAt',
+                    'value' => time() - 30*60
+                ]);
             }
-
-            /**
-             * Post to page success
-             * 1. Change post status
-             * 2. Update lastConfessionId
-             */
-            $post->status = 'approved';
-            $post->save();
-
-            $confessionIdConfig->value = $nextConfessionId;
-            $confessionIdConfig->save();
+            $lastPostAt = $lastPostAtConfig->value;
+            $carbonTime = Carbon::createFromTimestamp($lastPostAt);
+            $job = (new PostToFacebookPage($post))->delay($carbonTime->addMinutes(30));
+            dispatch($job);
+            // Update lastPostAt after queue
+            // Another new post has to wait for +30 minutes
+            $lastPostAtConfig->value =  $carbonTime->timestamp;
+            $lastPostAtConfig->save();
 
             /**
              * Log on who approve this post
@@ -107,7 +88,7 @@ class AdminController extends Controller{
             fwrite($logFile, $recordLog);
             fclose($logFile);
 
-            return response(['msg' => "Post id: {$graphNode->getField('id')}"], 200, ['Content-Type' => 'application/json']);
+            return response(['msg' => "Post queued"], 200, ['Content-Type' => 'application/json']);
         }
 
     }
