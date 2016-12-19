@@ -83,6 +83,13 @@ class PostToFacebookPage implements ShouldQueue{
         $post->status = 'approved';
         $post->save();
 
+        /**
+         * Update lastPostAt
+         */
+        $lastPostAtConfig = Config::where('key', 'lastPostAt')->first();
+        $lastPostAtConfig->value = time();
+        $lastPostAtConfig->save();
+
         $confessionIdConfig->value = $nextConfessionId;
         $confessionIdConfig->save();
     }
