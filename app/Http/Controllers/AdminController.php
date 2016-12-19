@@ -102,7 +102,7 @@ class AdminController extends Controller{
             }
             
             $logFileName = base_path().'/admin-activities.log';
-            $recordLog = "[{$time}] {$userRole->name} has approved on post id: {$post->id}\n";
+            $recordLog = "[{$time}] {$userRole->name} approved a post, post-id: {$post->id}\n";
             $logFile = fopen($logFileName, 'a');
             fwrite($logFile, $recordLog);
             fclose($logFile);

@@ -39,6 +39,19 @@ class PostController extends Controller
         $post->save();
 
         $redirectTo = empty($role) ? 'post-success' : 'admin';
+
+        /**
+         * Log activites of this post
+         * store IP address
+         */
+        $time = date('Y-m-d H:m:s');
+        $logFileName = base_path().'/post-activities.log';
+        $ipAddress = $req->ip();
+        $recordLog = "[{$time}] IP address {$ipAddress} submitted a post, post-id: {$post->id}\n";
+        $logFile = fopen($logFileName, 'a');
+        fwrite($logFile, $recordLog);
+        fclose($logFile);
+
         return redirect($redirectTo);
     }
     
