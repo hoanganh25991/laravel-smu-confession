@@ -70,7 +70,7 @@ class AdminController extends Controller{
             }
             $lastPostAt = $lastPostAtConfig->value;
             $carbonTime = Carbon::createFromTimestamp($lastPostAt);
-            $job = (new PostToFacebookPage($post))->delay($carbonTime->addMinutes(1));
+            $job = (new PostToFacebookPage($post))->delay($carbonTime->addMinutes(30));
             dispatch($job);
             // Update lastPostAt after queue
             // Another new post has to wait for +30 minutes
