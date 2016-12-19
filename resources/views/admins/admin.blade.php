@@ -38,17 +38,19 @@
                 <span style="margin-left: 20px">Posted on {{ $post->created_at }}</span>
             </div>
             <div class="row">
+                @php
+                    $postContent = htmlspecialchars($post->content);
+                    $postContentDiv = "<textarea name='post_content' class='post-content'>{$postContent}</textarea>";
+                @endphp
                 @if(!empty($post->photo_path))
                     <div style="position: relative; width: 350px" class="pull-left">
-                        <p>{{ $post->content }}</p>
+                        {!! $postContentDiv !!}
                     </div>
                     <div style="position: relative; width: 184px" class="pull-right">
                         <img class="img-responsive" src="{{ asset($post->photo_path) }}" height="150">
                     </div>
                 @else
-                    {{--<p>{{ $breakNewLineContent }}</p>--}}
-                    <?php $breakNewLineContent = preg_replace("/\r\n|\r|\n/", '<br/>', $post->content); ?>
-                    <p><?php echo $breakNewLineContent; ?></p>
+                    {!! $postContentDiv !!}
                 @endif
             </div>
             <div class="row">
@@ -69,9 +71,20 @@
         p {
             word-wrap: break-word;
         }
+
+        .post-content {
+            width: 100%;
+            outline: none;
+            resize: none;
+            overflow: auto;
+            white-space: normal;
+        }
     </style>
     <script>
         window.addEventListener('click', verifyPost);
+        $('textarea').on('change keyup keydown paste cut', function () {
+            $(this).height(0).height(this.scrollHeight);
+        }).change();
         function verifyPost(e){
             let btn = $(e.target);
             if(!btn.is('button[role="verifyPost"]')){
