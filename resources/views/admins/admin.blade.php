@@ -36,6 +36,7 @@
             <div class="row">
                 <span class="h4">Confession #{{$nextConfessionId++}}</span>
                 <span style="margin-left: 20px">Posted on {{ $post->created_at }}</span>
+                <span style="margin-left: 20px">From Ip: {{ $post->from_ip }}</span>
             </div>
             <div class="row">
                 @php
@@ -94,6 +95,7 @@
                 return;
             }
             console.log('btn verifyPost click');
+            btn.attr('disabled');
             let action = btn.attr('action');
             let parentDiv = btn.parents('div.post-row');
             let postId = btn.siblings('input[name="postId"]').val();

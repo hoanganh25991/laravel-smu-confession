@@ -35,7 +35,11 @@ class PostController extends Controller
             $photo_path = $photo->storeAs('photos', $fileName);
         }
 
-        $post = new Post(compact('content', 'photo_path'));
+        /**
+         * Also store ip address of user
+         */
+        $from_ip = $req->ip();
+        $post = new Post(compact('content', 'photo_path', 'from_ip'));
         $post->save();
 
         $redirectTo = empty($role) ? 'post-success' : 'admin';
