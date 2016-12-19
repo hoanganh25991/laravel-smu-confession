@@ -101,7 +101,7 @@ class AdminController extends Controller{
                 return response(['msg' => $msg, 'action' => 'reload page'], 422, ['Content-Type' => 'application/json']);
             }
             
-            $logFileName = base_path().'/server.log';
+            $logFileName = base_path().'/admin-activities.log';
             $recordLog = "[{$time}] {$userRole->name} has approved on post id: {$post->id}\n";
             $logFile = fopen($logFileName, 'a');
             fwrite($logFile, $recordLog);
