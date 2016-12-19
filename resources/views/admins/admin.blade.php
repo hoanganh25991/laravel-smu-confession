@@ -111,6 +111,11 @@
                 },
                 error(err){
                     console.log(err);
+                    let resObj = err.responseJSON;
+                    if(resObj.action == 'reload page'){
+                        window.alert(resObj.msg);
+                        window.location.reload();
+                    }
                 }
             });
         }

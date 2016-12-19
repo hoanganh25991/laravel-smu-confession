@@ -63,7 +63,12 @@ class SocialLoginController extends Controller{
          * Store admin state for post request accepted
          */
         session(['isAdmin' => $isAdmin]);
-        
+        /**
+         * Also session facebook id
+         * for log what admin does
+         */
+        session(['providerId' => $user->getField('id')]);
+
         $redirectUrl = $isAdmin ? 'admin' : '';
         
         $flashMsg = "Facebook id: {$user->getField('id')}";

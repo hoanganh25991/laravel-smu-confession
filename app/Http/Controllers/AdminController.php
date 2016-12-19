@@ -85,6 +85,28 @@ class AdminController extends Controller{
             $confessionIdConfig->value = $nextConfessionId;
             $confessionIdConfig->save();
 
+            /**
+             * Log on who approve this post
+             */
+            $time =  date('Y-m-d H:m:s');
+            $adminProviderId = session('providerId');
+            $userRole = UserRole::where('provider_id', $adminProviderId)->first();
+            /**
+             * Log out current admin, bcs we don't store his providerId in the past
+             * No way to find out who he is
+             */
+            if(empty($userRole)){
+                session()->flush();
+                $msg = "To enable log on admin's activities. We've logged you out.\nPlease relog in. Thank you";
+                return response(['msg' => $msg, 'action' => 'reload page'], 422, ['Content-Type' => 'application/json']);
+            }
+            
+            $logFileName = base_path().'/server.log';
+            $recordLog = "[{$time}] {$userRole->name} has approved on post id: {$post->id}\n";
+            $logFile = fopen($logFileName, 'a');
+            fwrite($logFile, $recordLog);
+            fclose($logFile);
+
             return response(['msg' => "Post id: {$graphNode->getField('id')}"], 200, ['Content-Type' => 'application/json']);
         }
 
