@@ -81,8 +81,15 @@ class AdminController extends Controller{
              * Bcs queue job may fail
              * Only when post success in PostToFacebookPage done > update
              */
-//            $lastPostAtConfig->value =  $carbonTime->timestamp;
-//            $lastPostAtConfig->save();
+            /**
+             * This is not the exactly time
+             * BUT when a post right after the previous queue post success
+             * STILL APPROVED BCS the lastPostAt still the previous of previous
+             * 13h post, 13h01 post > queue 13h > 13h30
+             * at 13h29 post > still run, bces 13h30 NOT UPDATE the real time success
+             */
+            $lastPostAtConfig->value =  $carbonTime->timestamp;
+            $lastPostAtConfig->save();
 
             /**
              * Update post status

@@ -87,7 +87,12 @@ class PostToFacebookPage implements ShouldQueue{
          * Update lastPostAt
          */
         $lastPostAtConfig = Config::where('key', 'lastPostAt')->first();
-        $lastPostAtConfig->value = time();
+        /**
+         * Compare which one is larger
+         * BCS success post may be still later of the queue
+         */
+        $lastPostAtTime = $lastPostAtConfig->value > time() ? $lastPostAtConfig->value : time();
+        $lastPostAtConfig->value = $lastPostAtTime;
         $lastPostAtConfig->save();
 
         $confessionIdConfig->value = $nextConfessionId;
