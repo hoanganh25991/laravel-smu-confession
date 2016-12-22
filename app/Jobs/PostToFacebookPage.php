@@ -91,7 +91,8 @@ class PostToFacebookPage implements ShouldQueue{
          * Compare which one is larger
          * BCS success post may be still later of the queue
          */
-        $lastPostAtTime = $lastPostAtConfig->value > time() ? $lastPostAtConfig->value : time();
+        $current = time();
+        $lastPostAtTime = ($lastPostAtConfig->value > $current) ? $lastPostAtConfig->value : $current;
         $lastPostAtConfig->value = $lastPostAtTime;
         $lastPostAtConfig->save();
 

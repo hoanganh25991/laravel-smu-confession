@@ -88,7 +88,8 @@ class AdminController extends Controller{
              * 13h post, 13h01 post > queue 13h > 13h30
              * at 13h29 post > still run, bces 13h30 NOT UPDATE the real time success
              */
-            $lastPostAtConfig->value =  $carbonTime->timestamp;
+//            $lastPostAtConfig->value =  $carbonTime->timestamp;
+            $lastPostAtConfig->value =  time();
             $lastPostAtConfig->save();
 
             /**
