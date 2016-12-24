@@ -89,7 +89,7 @@ class AdminController extends Controller{
              * at 13h29 post > still run, bces 13h30 NOT UPDATE the real time success
              */
 //            $lastPostAtConfig->value =  $carbonTime->timestamp;
-            $lastPostAtConfig->value =  time();
+            $lastPostAtConfig->value =  $lastPostAt + 30*60;
             $lastPostAtConfig->save();
 
             /**
