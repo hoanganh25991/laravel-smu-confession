@@ -103,7 +103,7 @@ class AdminController extends Controller{
         /**
          * Log on who approve this post
          */
-        $time = date('Y-m-d H:m:s');
+        $time = date('Y-m-d H:i:s');
         $adminProviderId = session('providerId');
         $userRole = UserRole::where('provider_id', $adminProviderId)->first();
         /**

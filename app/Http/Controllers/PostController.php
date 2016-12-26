@@ -48,7 +48,7 @@ class PostController extends Controller
          * Log activites of this post
          * store IP address
          */
-        $time = date('Y-m-d H:m:s');
+        $time = date('Y-m-d H:i:s');
         $logFileName = base_path().'/post-activities.log';
         $ipAddress = $req->ip();
         $recordLog = "[{$time}] IP address {$ipAddress} submitted a post, post-id: {$post->id}\n";
